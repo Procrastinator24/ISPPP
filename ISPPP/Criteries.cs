@@ -137,6 +137,14 @@ namespace ISPPP
             return start_time;
         }
 
+        public double GetInfoForGraphic(Workpiece[] workpieces, int delta = 0)
+        {
+            double[] start_time = (double[])CountCriteria(workpieces, delta);
+
+            double info = start_time[2];
+
+            return info;
+        }
         public string GetInfo(Workpiece[] workpieces, int delta = 0)
         {
             double[] start_time = (double[])CountCriteria(workpieces, delta);

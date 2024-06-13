@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using ScottPlot.Plottable;
 using System.Net.NetworkInformation;
 using System.IO;
+using System.Linq;
+using ScottPlot.Drawing.Colormaps;
 
 namespace ISPPP
 {
@@ -166,6 +168,7 @@ namespace ISPPP
 
             double[] xs;
             double[] ys;
+            
 
             double prevT = 0;
             double pos = workpieces_counted_times[0].times.Length - delta;
@@ -603,7 +606,8 @@ namespace ISPPP
             }
 
             return info;
-        } 
+        }
+        public List<double> sums { get; set; }
         private void ShowCriteriaInfoForAlgorithm(Workpiece[] workpieces, MethodType method, FormsPlot name)
         {
             Workpiece[] tmpData = Workpiece.Copy(workpieces);
@@ -685,6 +689,7 @@ namespace ISPPP
                 if (i == 0)
                 {
                     double[] sum = (double[])criterias[i].CountCriteria(tmpData, delta);
+                    sums = sum.ToList();
 
 					Color[] colors = new Color[sum.Length];
 
@@ -761,6 +766,127 @@ namespace ISPPP
         private void петровСоколицынToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Workpiece[] tmpData = Workpiece.Copy(_currentData);
+            //Workpiece[] Ps1 = PetrovSokolicinMethod.GetSum1Workpieces(_currentData);
+            //Workpiece[] Ps2 = PetrovSokolicinMethod.GetSum2Workpieces(_currentData);
+            //Workpiece[] PsD = PetrovSokolicinMethod.GetDifferenceWorkpieces(_currentData);
+            
+            
+            List<MethodType> tmpList = new List<MethodType>() {MethodType.Jonson_0, MethodType.Jonson_1,
+                MethodType.Jonson_2, MethodType.Jonson_3, MethodType.Jonson_4,
+                MethodType.Jonson_5, MethodType.Petrov_sum_1, MethodType.Petrov_sum_2,
+                MethodType.Petrov_difference};
+           
+            for (int i = 0; i < tmpList.Count(); i++)
+            {
+                var WorkAndDownTimeMachine = ShowCriteriaInfoForAlgorithmGraphic(tmpData, tmpList[i]);
+
+                //double[] workTime = (double[])timeWorkCriteria.CountCriteria(tmpList[i], delta);
+                //double downTime = (double)downTimeWorkCriteria.CountCriteria(tmpList[i], delta);
+                
+                chart1.Series[0].Points.AddXY(i, WorkAndDownTimeMachine[1]);
+                chart2.Series[0].Points.AddXY(i, WorkAndDownTimeMachine[0]);
+            }
+            chart1.Update();
+        }
+        private double[] ShowCriteriaInfoForAlgorithmGraphic(Workpiece[] workpieces, MethodType method)
+        {
+            Workpiece[] tmpData = Workpiece.Copy(workpieces);
+
+            int delta = 0;
+            string message = "";
+            switch (method)
+            {
+                case MethodType.Empty:
+                    {
+                        richTextBox1.AppendText(DisplayWorkpieces(workpieces, message));
+                        break;
+                    }
+                case MethodType.Jonson_0:
+                    {
+                        tmpData = JonsonsMethod.JonsonClassic(tmpData);
+                        break;
+                    }
+                case MethodType.Jonson_1:
+                    {
+                        tmpData = JonsonsMethod.Jonson(tmpData, 1);
+                        break;
+                    }
+                case MethodType.Jonson_2:
+                    {
+                        tmpData = JonsonsMethod.Jonson(tmpData, 2);
+                        break;
+                    }
+                case MethodType.Jonson_3:
+                    {
+                        tmpData = JonsonsMethod.Jonson(tmpData, 3);
+                        break;
+                    }
+                case MethodType.Jonson_4:
+                    {
+                        tmpData = JonsonsMethod.Jonson(tmpData, 4);
+                        break;
+                    }
+                case MethodType.Jonson_5:
+                    {
+                        tmpData = JonsonsMethod.Jonson(tmpData, 5);
+                        break;
+                    }
+                case MethodType.Petrov_sum_1:
+                    {
+                        tmpData = PetrovSokolicinMethod.GetSum1Workpieces(tmpData);
+                        break;
+                    }
+                case MethodType.Petrov_sum_2:
+                    {
+                        tmpData = PetrovSokolicinMethod.GetSum2Workpieces(tmpData);
+                        break;
+                    }
+                case MethodType.Petrov_difference:
+                    {
+                        tmpData = PetrovSokolicinMethod.GetDifferenceWorkpieces(tmpData);
+                        break;
+                    }
+            }
+
+            message = MethodTypeExtensions.GetPlanMethodDescriptionByEnumType(method);
+
+            if (!((int)method >= 21 && (int)method <= 23) == false)
+            {
+                delta = 3;
+                tmpData = PetrovSokolicinMethod.Petrov_Sokolicin(tmpData, true);
+            }
+            else
+            {
+                tmpData = PetrovSokolicinMethod.Petrov_Sokolicin(tmpData, false);
+            }
+
+            ICriteria[] criterias = CriteriesMethods.GetAllCriteries();
+            MachineTimeEndCriteria s = new MachineTimeEndCriteria();
+            double workTime = s.GetInfoForGraphic(tmpData, delta);
+            double downTime = Convert.ToDouble(criterias[1].GetInfo(tmpData, delta).Split(' ')[4].Trim());
+            return new double[2] { workTime, downTime };
+
+            //for (int i = 0; i < criterias.Length; i++)
+            //{
+                
+            //    if (i == 0)
+            //    {
+                    
+            //        double[] sum = (double[])criterias[i].CountCriteria(tmpData, delta);
+            //        sums = sum.ToList();
+            //        c++;
+            //    }
+            //    if (i == 1)
+            //    {
+            //        return criterias[i].GetInfo(tmpData, delta);
+            //    }
+            //}
+            //return "Некорректно";
         }
     }
 }

@@ -29,6 +29,12 @@ namespace ISPPP
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.данныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,9 +65,13 @@ namespace ISPPP
             this.formsPlot3 = new ScottPlot.FormsPlot();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.formsPlot2 = new ScottPlot.FormsPlot();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.PetrovSokolicin.SuspendLayout();
@@ -70,6 +80,9 @@ namespace ISPPP
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -160,35 +173,35 @@ namespace ISPPP
             // обобщение1ToolStripMenuItem
             // 
             this.обобщение1ToolStripMenuItem.Name = "обобщение1ToolStripMenuItem";
-            this.обобщение1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.обобщение1ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.обобщение1ToolStripMenuItem.Text = "Обобщение 1";
             this.обобщение1ToolStripMenuItem.Click += new System.EventHandler(this.обобщение1ToolStripMenuItem_Click);
             // 
             // обобщение2ToolStripMenuItem
             // 
             this.обобщение2ToolStripMenuItem.Name = "обобщение2ToolStripMenuItem";
-            this.обобщение2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.обобщение2ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.обобщение2ToolStripMenuItem.Text = "Обобщение 2";
             this.обобщение2ToolStripMenuItem.Click += new System.EventHandler(this.обобщение2ToolStripMenuItem_Click);
             // 
             // обобщение3ToolStripMenuItem
             // 
             this.обобщение3ToolStripMenuItem.Name = "обобщение3ToolStripMenuItem";
-            this.обобщение3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.обобщение3ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.обобщение3ToolStripMenuItem.Text = "Обобщение 3";
             this.обобщение3ToolStripMenuItem.Click += new System.EventHandler(this.обобщение3ToolStripMenuItem_Click);
             // 
             // обобщение4ToolStripMenuItem
             // 
             this.обобщение4ToolStripMenuItem.Name = "обобщение4ToolStripMenuItem";
-            this.обобщение4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.обобщение4ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.обобщение4ToolStripMenuItem.Text = "Обобщение 4";
             this.обобщение4ToolStripMenuItem.Click += new System.EventHandler(this.обобщение4ToolStripMenuItem_Click);
             // 
             // обобщение5ToolStripMenuItem
             // 
             this.обобщение5ToolStripMenuItem.Name = "обобщение5ToolStripMenuItem";
-            this.обобщение5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.обобщение5ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.обобщение5ToolStripMenuItem.Text = "Обобщение 5";
             this.обобщение5ToolStripMenuItem.Click += new System.EventHandler(this.обобщение5ToolStripMenuItem_Click);
             // 
@@ -206,21 +219,21 @@ namespace ISPPP
             // сумма1ToolStripMenuItem
             // 
             this.сумма1ToolStripMenuItem.Name = "сумма1ToolStripMenuItem";
-            this.сумма1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сумма1ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.сумма1ToolStripMenuItem.Text = "Сумма 1";
             this.сумма1ToolStripMenuItem.Click += new System.EventHandler(this.сумма1ToolStripMenuItem_Click);
             // 
             // сумма2ToolStripMenuItem
             // 
             this.сумма2ToolStripMenuItem.Name = "сумма2ToolStripMenuItem";
-            this.сумма2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сумма2ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.сумма2ToolStripMenuItem.Text = "Сумма 2";
             this.сумма2ToolStripMenuItem.Click += new System.EventHandler(this.сумма2ToolStripMenuItem_Click);
             // 
             // сумма3ToolStripMenuItem
             // 
             this.сумма3ToolStripMenuItem.Name = "сумма3ToolStripMenuItem";
-            this.сумма3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сумма3ToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.сумма3ToolStripMenuItem.Text = "Разность";
             this.сумма3ToolStripMenuItem.Click += new System.EventHandler(this.сумма3ToolStripMenuItem_Click);
             // 
@@ -231,7 +244,7 @@ namespace ISPPP
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1028, 324);
+            this.panel1.Size = new System.Drawing.Size(1028, 371);
             this.panel1.TabIndex = 1;
             // 
             // richTextBox1
@@ -239,7 +252,7 @@ namespace ISPPP
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(884, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(144, 324);
+            this.richTextBox1.Size = new System.Drawing.Size(144, 371);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -247,11 +260,12 @@ namespace ISPPP
             // 
             this.PetrovSokolicin.Controls.Add(this.tabPage1);
             this.PetrovSokolicin.Controls.Add(this.tabPage2);
+            this.PetrovSokolicin.Controls.Add(this.tabPage3);
             this.PetrovSokolicin.Dock = System.Windows.Forms.DockStyle.Left;
             this.PetrovSokolicin.Location = new System.Drawing.Point(0, 0);
             this.PetrovSokolicin.Name = "PetrovSokolicin";
             this.PetrovSokolicin.SelectedIndex = 0;
-            this.PetrovSokolicin.Size = new System.Drawing.Size(884, 324);
+            this.PetrovSokolicin.Size = new System.Drawing.Size(884, 371);
             this.PetrovSokolicin.TabIndex = 0;
             // 
             // tabPage1
@@ -261,7 +275,7 @@ namespace ISPPP
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(876, 298);
+            this.tabPage1.Size = new System.Drawing.Size(876, 345);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Jonson";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -295,7 +309,7 @@ namespace ISPPP
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(876, 298);
+            this.tabPage2.Size = new System.Drawing.Size(876, 345);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "PetrovSokolicin";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -335,16 +349,77 @@ namespace ISPPP
             this.formsPlot2.Size = new System.Drawing.Size(70, 110);
             this.formsPlot2.TabIndex = 1;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.chart2);
+            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.chart1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(876, 345);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(753, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(117, 32);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Отобразить график";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // chart1
+            // 
+            this.chart1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            chartArea2.AxisY.LabelAutoFitMinFontSize = 5;
+            chartArea2.AxisY.MaximumAutoSize = 100F;
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
+            this.chart1.Location = new System.Drawing.Point(436, 44);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(434, 293);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // chart2
+            // 
+            chartArea1.AxisY.LabelAutoFitMinFontSize = 5;
+            chartArea1.AxisY.MaximumAutoSize = 100F;
+            chartArea1.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart2.Legends.Add(legend1);
+            this.chart2.Location = new System.Drawing.Point(6, 44);
+            this.chart2.Name = "chart2";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart2.Series.Add(series1);
+            this.chart2.Size = new System.Drawing.Size(434, 293);
+            this.chart2.TabIndex = 2;
+            this.chart2.Text = "chart2";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1028, 348);
+            this.ClientSize = new System.Drawing.Size(1028, 395);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -361,6 +436,9 @@ namespace ISPPP
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,6 +478,10 @@ namespace ISPPP
         private ScottPlot.FormsPlot formsPlot2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private ScottPlot.FormsPlot formsPlot3;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }
 
