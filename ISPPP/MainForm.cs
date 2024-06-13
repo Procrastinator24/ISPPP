@@ -10,8 +10,6 @@ using System.Windows.Forms;
 using ScottPlot.Plottable;
 using System.Net.NetworkInformation;
 using System.IO;
-using System.Linq;
-using ScottPlot.Drawing.Colormaps;
 
 namespace ISPPP
 {
@@ -168,7 +166,6 @@ namespace ISPPP
 
             double[] xs;
             double[] ys;
-            
 
             double prevT = 0;
             double pos = workpieces_counted_times[0].times.Length - delta;
@@ -339,7 +336,7 @@ namespace ISPPP
 
                 OrderChangedEvent?.Invoke(new MethodApplyEventArgs() { workpieces = _modifiedData, method = _currentMethod, has_extended_sum = false });
 
-				richTextBox1.Text = "";
+				//richTextBox1.Text = "";
                 ShowCriteriaInfoForAlgorithm(_currentData, _currentMethod, name);
             }
         }
@@ -471,7 +468,7 @@ namespace ISPPP
 
                 OrderChangedEvent?.Invoke(new MethodApplyEventArgs() { workpieces = _modifiedData, method = _currentMethod, has_extended_sum = true });
 
-				richTextBox1.Text = "";
+				//richTextBox1.Text = "";
                 ShowCriteriaInfoForAlgorithm(_currentData, _currentMethod, name);
             }
         }
@@ -606,8 +603,7 @@ namespace ISPPP
             }
 
             return info;
-        }
-        public List<double> sums { get; set; }
+        } 
         private void ShowCriteriaInfoForAlgorithm(Workpiece[] workpieces, MethodType method, FormsPlot name)
         {
             Workpiece[] tmpData = Workpiece.Copy(workpieces);
@@ -689,7 +685,6 @@ namespace ISPPP
                 if (i == 0)
                 {
                     double[] sum = (double[])criterias[i].CountCriteria(tmpData, delta);
-                    sums = sum.ToList();
 
 					Color[] colors = new Color[sum.Length];
 
@@ -729,9 +724,9 @@ namespace ISPPP
                     plt.Legend();
                     plt.SaveFig($"pie_legend{c}.png");
 					pie.ShowLabels = true;
-					formsPlot2.Plot.Add(pie);
-					formsPlot2.Plot.SetAxisLimits(-1, 1, -1, 1);
-					formsPlot2.Render();
+					//formsPlot2.Plot.Add(pie);
+					//formsPlot2.Plot.SetAxisLimits(-1, 1, -1, 1);
+					//formsPlot2.Render();
 
 					if (System.IO.File.Exists($"pie_legend{c}.png"))
 					{
@@ -768,125 +763,104 @@ namespace ISPPP
 
         }
 
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            Workpiece[] tmpData = Workpiece.Copy(_currentData);
-            //Workpiece[] Ps1 = PetrovSokolicinMethod.GetSum1Workpieces(_currentData);
-            //Workpiece[] Ps2 = PetrovSokolicinMethod.GetSum2Workpieces(_currentData);
-            //Workpiece[] PsD = PetrovSokolicinMethod.GetDifferenceWorkpieces(_currentData);
-            
-            
-            List<MethodType> tmpList = new List<MethodType>() {MethodType.Jonson_0, MethodType.Jonson_1,
-                MethodType.Jonson_2, MethodType.Jonson_3, MethodType.Jonson_4,
-                MethodType.Jonson_5, MethodType.Petrov_sum_1, MethodType.Petrov_sum_2,
-                MethodType.Petrov_difference};
-           
-            for (int i = 0; i < tmpList.Count(); i++)
-            {
-                var WorkAndDownTimeMachine = ShowCriteriaInfoForAlgorithmGraphic(tmpData, tmpList[i]);
-
-                //double[] workTime = (double[])timeWorkCriteria.CountCriteria(tmpList[i], delta);
-                //double downTime = (double)downTimeWorkCriteria.CountCriteria(tmpList[i], delta);
-                
-                chart1.Series[0].Points.AddXY(i, WorkAndDownTimeMachine[1]);
-                chart2.Series[0].Points.AddXY(i, WorkAndDownTimeMachine[0]);
-            }
-            chart1.Update();
+            richTextBox1.Text = "";
         }
-        private double[] ShowCriteriaInfoForAlgorithmGraphic(Workpiece[] workpieces, MethodType method)
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            Workpiece[] tmpData = Workpiece.Copy(workpieces);
-
-            int delta = 0;
-            string message = "";
-            switch (method)
+            if (radioButton1.Checked)
             {
-                case MethodType.Empty:
-                    {
-                        richTextBox1.AppendText(DisplayWorkpieces(workpieces, message));
-                        break;
-                    }
-                case MethodType.Jonson_0:
-                    {
-                        tmpData = JonsonsMethod.JonsonClassic(tmpData);
-                        break;
-                    }
-                case MethodType.Jonson_1:
-                    {
-                        tmpData = JonsonsMethod.Jonson(tmpData, 1);
-                        break;
-                    }
-                case MethodType.Jonson_2:
-                    {
-                        tmpData = JonsonsMethod.Jonson(tmpData, 2);
-                        break;
-                    }
-                case MethodType.Jonson_3:
-                    {
-                        tmpData = JonsonsMethod.Jonson(tmpData, 3);
-                        break;
-                    }
-                case MethodType.Jonson_4:
-                    {
-                        tmpData = JonsonsMethod.Jonson(tmpData, 4);
-                        break;
-                    }
-                case MethodType.Jonson_5:
-                    {
-                        tmpData = JonsonsMethod.Jonson(tmpData, 5);
-                        break;
-                    }
-                case MethodType.Petrov_sum_1:
-                    {
-                        tmpData = PetrovSokolicinMethod.GetSum1Workpieces(tmpData);
-                        break;
-                    }
-                case MethodType.Petrov_sum_2:
-                    {
-                        tmpData = PetrovSokolicinMethod.GetSum2Workpieces(tmpData);
-                        break;
-                    }
-                case MethodType.Petrov_difference:
-                    {
-                        tmpData = PetrovSokolicinMethod.GetDifferenceWorkpieces(tmpData);
-                        break;
-                    }
+                _currentMethod = MethodType.Jonson_1;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(1, name);
             }
+        }
 
-            message = MethodTypeExtensions.GetPlanMethodDescriptionByEnumType(method);
-
-            if (!((int)method >= 21 && (int)method <= 23) == false)
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked)
             {
-                delta = 3;
-                tmpData = PetrovSokolicinMethod.Petrov_Sokolicin(tmpData, true);
+                _currentMethod = MethodType.Jonson_2;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(2, name);
             }
-            else
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton3.Checked) { 
+                _currentMethod = MethodType.Jonson_3;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(3, name);
+            }
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton4.Checked)
+            { 
+                _currentMethod = MethodType.Jonson_4;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(4, name);
+            }
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked)
             {
-                tmpData = PetrovSokolicinMethod.Petrov_Sokolicin(tmpData, false);
+                _currentMethod = MethodType.Jonson_5;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(5, name);
             }
+        }
 
-            ICriteria[] criterias = CriteriesMethods.GetAllCriteries();
-            MachineTimeEndCriteria s = new MachineTimeEndCriteria();
-            double workTime = s.GetInfoForGraphic(tmpData, delta);
-            double downTime = Convert.ToDouble(criterias[1].GetInfo(tmpData, delta).Split(' ')[4].Trim());
-            return new double[2] { workTime, downTime };
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton6.Checked)
+            {
+                _currentMethod = MethodType.Petrov_sum_1;
+                var name = formsPlot3;
+                ПетровСоколицын_Click(1, name);
+            }
+        }
 
-            //for (int i = 0; i < criterias.Length; i++)
-            //{
-                
-            //    if (i == 0)
-            //    {
-                    
-            //        double[] sum = (double[])criterias[i].CountCriteria(tmpData, delta);
-            //        sums = sum.ToList();
-            //        c++;
-            //    }
-            //    if (i == 1)
-            //    {
-            //        return criterias[i].GetInfo(tmpData, delta);
-            //    }
-            //}
-            //return "Некорректно";
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton7.Checked)
+            {
+                _currentMethod = MethodType.Petrov_sum_2;
+                var name = formsPlot3;
+                ПетровСоколицын_Click(2, name);
+            }
+        }
+
+        private void radioButton8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton8.Checked)
+            {
+                _currentMethod = MethodType.Petrov_difference;
+                var name = formsPlot3;
+                ПетровСоколицын_Click(3, name);
+            }
+        }
+
+        private void АлгоритмToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 newWindow = new Form1();
+            newWindow.Show();
         }
     }
 }
