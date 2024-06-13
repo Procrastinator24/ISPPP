@@ -336,7 +336,7 @@ namespace ISPPP
 
                 OrderChangedEvent?.Invoke(new MethodApplyEventArgs() { workpieces = _modifiedData, method = _currentMethod, has_extended_sum = false });
 
-				richTextBox1.Text = "";
+				//richTextBox1.Text = "";
                 ShowCriteriaInfoForAlgorithm(_currentData, _currentMethod, name);
             }
         }
@@ -468,7 +468,7 @@ namespace ISPPP
 
                 OrderChangedEvent?.Invoke(new MethodApplyEventArgs() { workpieces = _modifiedData, method = _currentMethod, has_extended_sum = true });
 
-				richTextBox1.Text = "";
+				//richTextBox1.Text = "";
                 ShowCriteriaInfoForAlgorithm(_currentData, _currentMethod, name);
             }
         }
@@ -724,9 +724,9 @@ namespace ISPPP
                     plt.Legend();
                     plt.SaveFig($"pie_legend{c}.png");
 					pie.ShowLabels = true;
-					formsPlot2.Plot.Add(pie);
-					formsPlot2.Plot.SetAxisLimits(-1, 1, -1, 1);
-					formsPlot2.Render();
+					//formsPlot2.Plot.Add(pie);
+					//formsPlot2.Plot.SetAxisLimits(-1, 1, -1, 1);
+					//formsPlot2.Render();
 
 					if (System.IO.File.Exists($"pie_legend{c}.png"))
 					{
@@ -761,6 +761,106 @@ namespace ISPPP
         private void петровСоколицынToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                _currentMethod = MethodType.Jonson_1;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(1, name);
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked)
+            {
+                _currentMethod = MethodType.Jonson_2;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(2, name);
+            }
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton3.Checked) { 
+                _currentMethod = MethodType.Jonson_3;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(3, name);
+            }
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton4.Checked)
+            { 
+                _currentMethod = MethodType.Jonson_4;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(4, name);
+            }
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked)
+            {
+                _currentMethod = MethodType.Jonson_5;
+                FormsPlot name = formsPlot1;
+                Jonson_Обощение_Click(5, name);
+            }
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton6.Checked)
+            {
+                _currentMethod = MethodType.Petrov_sum_1;
+                var name = formsPlot3;
+                ПетровСоколицын_Click(1, name);
+            }
+        }
+
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton7.Checked)
+            {
+                _currentMethod = MethodType.Petrov_sum_2;
+                var name = formsPlot3;
+                ПетровСоколицын_Click(2, name);
+            }
+        }
+
+        private void radioButton8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton8.Checked)
+            {
+                _currentMethod = MethodType.Petrov_difference;
+                var name = formsPlot3;
+                ПетровСоколицын_Click(3, name);
+            }
+        }
+
+        private void АлгоритмToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 newWindow = new Form1();
+            newWindow.Show();
         }
     }
 }
